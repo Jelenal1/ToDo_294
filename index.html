@@ -15,16 +15,29 @@
 <body>
   <!--All Styling classes are bootstrap styling classes-->
   <!--code from getbootstrap.com-->
-  <nav class="navbar bg-opacity-75" style="background-color: blueviolet;">
+  <nav class="navbar navbar-expand-lg navigation ">
     <div class="container-fluid">
-      <a class="navbar-brand ms-3 fs-2 text-light" href="/index.html">ToDos</a>
+      <a class="navbar-brand text-light" href="/index.html">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active text-light" aria-current="page" href="/index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="./pages/login.html">Login</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
 
   <ul id="list" class="list-group ms-4 me-4 mt-1"></ul>
   <form action="" id="todolist" class="ms-4 me-4">
     <label for="addtodo">Add to do</label>
-    <input type="text" name="newtask" placeholder="Write your new to do" id="addtodo" class="form-control borderblueviolet">
+    <input type="text" name="newtask" placeholder="Write your new to do" autocomplete="off" id="addtodo" class="form-control borderblueviolet">
     <button type="submit" id="submit" class="button borderblueviolet">💾</button>
     <label for="submit">Save</label>
   </form>
