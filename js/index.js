@@ -27,6 +27,14 @@ function getNewItemsFromInput(SavedItems) {
     putNewItemsIntoList(SavedItems);
 }
 
+
+function deleteItem(button, SavedItems) {
+    const idOfItemToDelete = button.parentElement.id;
+    const ItemToDelete = document.getElementById(idOfItemToDelete);
+    delete SavedItems[idOfItemToDelete];
+    ItemToDelete.remove();
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const InputElements = {1: "ToDo1", 2: "ToDo2"};
     const getSubmitElements = document.forms["todolist"];
