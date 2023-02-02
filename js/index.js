@@ -4,8 +4,17 @@ function putNewItemsIntoList(list){
     if (list == undefined) return;
     Object.entries(list).forEach((value) => {
         const newItem = document.createElement("li");
+        newItem.id = value[0];
+        const editbutton = document.createElement("button");
+        editbutton.className = "editbutton";
+        editbutton.innerText = "Edit";
+        const deletebutton = document.createElement("button");
+        deletebutton.className = "deletebutton";
+        deletebutton.innerText = "Delete";
         newItem.innerText = value[1];
         listOfToDoItems.append(newItem);
+        newItem.append(editbutton);
+        newItem.append(deletebutton);
     });
 }
 
