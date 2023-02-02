@@ -34,6 +34,7 @@ function editButton(SavedItems, ItemToEdit){
 
 function newLi(value){
     const newItem = document.createElement("li");
+    newItem.classList.add("list-group-item");
     newItem.id = value[0];
     newItem.innerText = value[1];
     return newItem;
