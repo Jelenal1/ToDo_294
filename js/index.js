@@ -12,7 +12,9 @@ function RenderList(list){
 
 function deleteButton(SavedItems, ItemToDelete){
     const deletebutton = document.createElement("button");
-        deletebutton.className = "deletebutton";
+    deletebutton.classList.add("btn");
+    deletebutton.classList.add("btn-outline-dark");
+    deletebutton.classList.add("ms-2");
         deletebutton.innerText = "🗑";
         deletebutton.addEventListener("click", () => {
             delete SavedItems[ItemToDelete];
@@ -23,7 +25,8 @@ function deleteButton(SavedItems, ItemToDelete){
 
 function editButton(SavedItems, ItemToEdit){
     const editbutton = document.createElement("button");
-        editbutton.className = "editbutton";
+        editbutton.classList.add("btn");
+        editbutton.classList.add("btn-outline-dark");
         editbutton.innerText = "Edit";
         editbutton.addEventListener("click", () => {
             SavedItems[ItemToEdit] = prompt();
@@ -35,6 +38,8 @@ function editButton(SavedItems, ItemToEdit){
 function newLi(value){
     const newItem = document.createElement("li");
     newItem.classList.add("list-group-item");
+    newItem.classList.add("border-dark");
+    newItem.classList.add("fw-bold");
     newItem.id = value[0];
     newItem.innerText = value[1];
     return newItem;
@@ -42,7 +47,7 @@ function newLi(value){
 
 function getNewItemsFromInput(SavedItems) {
     const getInputElements = document.getElementById("addtodo");
-    const idOfNewItem = Object.keys(SavedItems).length; //Zeile von Kursleiter
+    const idOfNewItem = Object.keys(SavedItems).length +1; //Zeile von Kursleiter
     if (getInputElements.value == "") return;
     SavedItems[idOfNewItem] = getInputElements.value;
     RenderList(SavedItems);
@@ -50,7 +55,7 @@ function getNewItemsFromInput(SavedItems) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const InputElements = {};
+    const InputElements = {1: "TODO"};
     const getSubmitElements = document.forms["todolist"];
 
     

@@ -9,11 +9,17 @@
     <script src="./js/index.js"></script>
 </head>
 <body>
-    <h1 class="ms-4">ToDos</h1>
-    <ul id="list" class="list-group ms-4 me-5"></ul>
+    <!--code from getbootstrap.com-->  
+    <nav class="navbar bg-opacity-75" style="background-color: blueviolet;">
+        <div class="container-fluid">
+          <a class="navbar-brand ms-3 fs-2 text-light" href="/index.html">ToDos</a>
+        </div>
+      </nav>
+      
+    <ul id="list" class="list-group ms-4 me-5 mt-1"></ul>
     <form action="" id="todolist" class="ms-4 me-5">
-        <input type="text" name="text" id="addtodo" class="form-control">
-        <button type="submit" id="submit" class="btn btn-outline-secondary">add</button>
+        <input type="text" name="text" id="addtodo" class="form-control border-dark">
+        <button type="submit" id="submit" class="btn btn-outline-dark">add</button>
     </form>
 </body>
 </html>
