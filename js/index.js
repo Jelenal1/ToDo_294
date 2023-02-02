@@ -10,7 +10,7 @@ function putNewItemsIntoList(list){
 }
 
 function getNewItemsFromInput() {
-    const getInputElements = document.getElementById("newtd");
+    const getInputElements = document.getElementById("addtodo");
     const getSubmitElements = document.forms["todolist"];
 
 }
