@@ -9,19 +9,24 @@ function putNewItemsIntoList(list){
     });
 }
 
-function getNewItemsFromInput() {
+function getNewItemsFromInput(SavedItems) {
     const getInputElements = document.getElementById("addtodo");
-    const getSubmitElements = document.forms["todolist"];
-
+    const idOfNewItem = parseInt(Object.keys(SavedItems)[Object.keys(SavedItems).length - 1]) + 1;
+    if (getInputElements.value == "") return;
+    SavedItems[idOfNewItem] = getInputElements.value;
+    console.log(SavedItems);
+    putNewItemsIntoList(SavedItems);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
     const InputElements = {1: "ToDo1", 2: "ToDo2"};
+    const getSubmitElements = document.forms["todolist"];
+
     
     putNewItemsIntoList(InputElements);
 
     getSubmitElements.addEventListener("submit", function (event) {
         event.preventDefault();
-        putNewItemsIntoList(InputElements);
+        getNewItemsFromInput(InputElements);
     })
 })
