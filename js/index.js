@@ -9,11 +9,15 @@ function putNewItemsIntoList(list){
     });
 }
 
+function getNewItemsFromInput() {
+    const getInputElements = document.getElementById("newtd");
+    const getSubmitElements = document.forms["todolist"];
+
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     const InputElements = {1: "ToDo1", 2: "ToDo2"};
-    const getInputElements = document.getElementById("newtd");
-    const getSubmitElements = document.forms["addtodo"];
+    
     putNewItemsIntoList(InputElements);
 
     getSubmitElements.addEventListener("submit", function (event) {
