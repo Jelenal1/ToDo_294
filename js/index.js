@@ -12,10 +12,10 @@ function RenderList(list) {
 
 function deleteButton(SavedItems, ItemToDelete) {
     const deletebutton = document.createElement("button");
-    deletebutton.classList.add("btn");  //code from getbootstrap.com
-    deletebutton.classList.add("btn-outline-dark"); //code from getbootstrap.com
+    deletebutton.classList.add("button");  
+    deletebutton.classList.add("borderblueviolet");  
     deletebutton.classList.add("ms-2"); //code from getbootstrap.com
-    deletebutton.innerText = "🗑";
+    deletebutton.innerText = "🗑️";
     deletebutton.addEventListener("click", () => {
         delete SavedItems[ItemToDelete];
         RenderList(SavedItems);
@@ -25,9 +25,9 @@ function deleteButton(SavedItems, ItemToDelete) {
 
 function editButton(SavedItems, ItemToEdit) {
     const editbutton = document.createElement("button");
-    editbutton.classList.add("btn");    //code from getbootstrap.com
-    editbutton.classList.add("btn-outline-dark");   //code from getbootstrap.com
-    editbutton.innerText = "Edit";
+    editbutton.classList.add("button");    
+    editbutton.classList.add("borderblueviolet");    
+    editbutton.innerText = "✏️";
     editbutton.addEventListener("click", () => {
         SavedItems[ItemToEdit] = prompt();
         RenderList(SavedItems);
@@ -38,7 +38,7 @@ function editButton(SavedItems, ItemToEdit) {
 function newLi(value) {
     const newItem = document.createElement("li");
     newItem.classList.add("list-group-item");   //code from getbootstrap.com
-    newItem.classList.add("border-dark");   //code from getbootstrap.com
+    newItem.classList.add("borderblueviolet");   
     newItem.classList.add("fw-bold");   //code from getbootstrap.com
     newItem.id = value[0];
     newItem.innerText = value[1];

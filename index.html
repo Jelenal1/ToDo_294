@@ -10,6 +10,23 @@
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <script src="./js/index.js"></script>
 </head>
+<style>
+  /* code from https://www.w3schools.com/csS/css3_buttons.asp */
+  .borderblueviolet {
+    border: 2px solid blueviolet;
+  }
+  .button {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 20px;
+  }
+  .button:hover {
+    background-color: blueviolet;
+  }
+</style>
 
 <body>
   <!--All Styling classes are bootstrap styling classes-->
@@ -20,10 +37,12 @@
     </div>
   </nav>
 
-  <ul id="list" class="list-group ms-4 me-5 mt-1"></ul>
-  <form action="" id="todolist" class="ms-4 me-5">
-    <input type="text" name="text" id="addtodo" class="form-control border-dark">
-    <button type="submit" id="submit" class="btn btn-outline-dark">add</button>
+  <ul id="list" class="list-group ms-4 me-4 mt-1"></ul>
+  <form action="" id="todolist" class="ms-4 me-4">
+    <label for="addtodo">Add to do</label>
+    <input type="text" name="newtask" id="addtodo" class="form-control borderblueviolet">
+    <button type="submit" id="submit" class="button borderblueviolet">💾</button>
+    <label for="submit">Save</label>
   </form>
 </body>
 
