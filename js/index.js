@@ -29,9 +29,25 @@ function editButton(SavedItems, ItemToEdit) {
     editbutton.classList.add("borderblueviolet");    
     editbutton.innerText = "✏️";
     editbutton.addEventListener("click", () => {
-        SavedItems[ItemToEdit] = prompt();
-        RenderList(SavedItems);
-    });
+        const li = document.getElementById(ItemToEdit);
+        const input = document.createElement("input");
+        input.setAttribute("type", "text");
+        // code from chat.openai.com
+        input.value = li.innerText.slice(0, li.innerText.length -5);
+        li.innerText = "";
+        li.appendChild(input);
+        input.focus();
+      
+        input.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" && input.value !== "") {
+            const updatedValue = input.value;
+            li.removeChild(input);
+            li.innerText = updatedValue;
+            SavedItems[ItemToEdit] = updatedValue;
+            RenderList(SavedItems);
+          }
+        });
+      });
     return editbutton;
 }
 
