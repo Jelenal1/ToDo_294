@@ -1,4 +1,4 @@
-function putNewItemsIntoList(list){
+function RenderList(list){
     const listOfToDoItems = document.getElementById("list");
     listOfToDoItems.innerText = "";
     if (list == undefined) return;
@@ -16,7 +16,7 @@ function deleteButton(SavedItems, ItemToDelete){
         deletebutton.innerText = "🗑";
         deletebutton.addEventListener("click", () => {
             delete SavedItems[ItemToDelete];
-            putNewItemsIntoList(SavedItems);
+            RenderList(SavedItems);
         });
         return deletebutton;
 }
@@ -27,7 +27,7 @@ function editButton(SavedItems, ItemToEdit){
         editbutton.innerText = "Edit";
         editbutton.addEventListener("click", () => {
             SavedItems[ItemToEdit] = prompt();
-            putNewItemsIntoList(SavedItems);
+            RenderList(SavedItems);
         });
         return editbutton;
 }
@@ -45,16 +45,16 @@ function getNewItemsFromInput(SavedItems) {
     const idOfNewItem = Object.keys(SavedItems).length; //Zeile von Kursleiter
     if (getInputElements.value == "") return;
     SavedItems[idOfNewItem] = getInputElements.value;
-    putNewItemsIntoList(SavedItems);
+    RenderList(SavedItems);
 }
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const InputElements = {1: "ToDo1", 2: "ToDo2"};
+    const InputElements = {};
     const getSubmitElements = document.forms["todolist"];
 
     
-    putNewItemsIntoList(InputElements);
+    RenderList(InputElements);
 
     getSubmitElements.addEventListener("submit", function (event) {
         event.preventDefault();
