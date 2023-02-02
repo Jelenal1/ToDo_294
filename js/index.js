@@ -8,6 +8,7 @@ function putNewItemsIntoList(list){
         newItem.innerText = value[1];
         
         newItem.append(deleteButton(list, newItem.id))
+        newItem.append(editButton(list, newItem.id))
         listOfToDoItems.append(newItem);
     });
 }
@@ -23,18 +24,20 @@ function deleteButton(SavedItems, ItemToDelete){
         return deletebutton;
 }
 
-function editButton(SavedItems){
+function editButton(SavedItems, ItemToEdit){
     const editbutton = document.createElement("button");
         editbutton.className = "editbutton";
         editbutton.innerText = "Edit";
-    const ParentElement = editButton.parentElement;
-    const ItemToEdit = ParentElement.id;
-    SavedItems[ItemToEdit] = prompt();
+        editbutton.addEventListener("click", () => {
+            SavedItems[ItemToEdit] = prompt();
+            putNewItemsIntoList(SavedItems);
+        });
+        return editbutton;
 }
 
 function getNewItemsFromInput(SavedItems) {
     const getInputElements = document.getElementById("addtodo");
-    const idOfNewItem = parseInt(Object.keys(SavedItems)[Object.keys(SavedItems).length - 1]) + 1;
+    const idOfNewItem = Object.keys(SavedItems).length; //Zeile von Kursleiter
     if (getInputElements.value == "") return;
     SavedItems[idOfNewItem] = getInputElements.value;
     console.log(SavedItems);
