@@ -1,7 +1,7 @@
-document.addEventListener(onload, function () {
+document.addEventListener("DOMContentLoaded", function () {
     const getInputElements = document.getElementById("newtd");
-    console.log(getInputElements);
-    getInputElements.addEventListener("submit", (event) => {
+    const getSubmitElements = document.forms["addtodo"];
+    getSubmitElements.addEventListener("submit", function (event) {
         event.preventDefault();
-    });
+    })
 })
