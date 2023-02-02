@@ -12,9 +12,9 @@ function putNewItemsIntoList(list){
         deletebutton.className = "deletebutton";
         deletebutton.innerText = "Delete";
         newItem.innerText = value[1];
-        listOfToDoItems.append(newItem);
         newItem.append(editbutton);
         newItem.append(deletebutton);
+        listOfToDoItems.append(newItem);
     });
 }
 
@@ -30,9 +30,7 @@ function getNewItemsFromInput(SavedItems) {
 
 function deleteItem(button, SavedItems) {
     const idOfItemToDelete = button.parentElement.id;
-    const ItemToDelete = document.getElementById(idOfItemToDelete);
     delete SavedItems[idOfItemToDelete];
-    ItemToDelete.remove();
 }
 
 document.addEventListener("DOMContentLoaded", function () {
