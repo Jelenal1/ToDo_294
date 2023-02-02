@@ -5,17 +5,31 @@ function putNewItemsIntoList(list){
     Object.entries(list).forEach((value) => {
         const newItem = document.createElement("li");
         newItem.id = value[0];
-        const editbutton = document.createElement("button");
-        editbutton.className = "editbutton";
-        editbutton.innerText = "Edit";
-        const deletebutton = document.createElement("button");
-        deletebutton.className = "deletebutton";
-        deletebutton.innerText = "Delete";
         newItem.innerText = value[1];
-        newItem.append(editbutton);
-        newItem.append(deletebutton);
+        
+        newItem.append(deleteButton(list, newItem.id))
         listOfToDoItems.append(newItem);
     });
+}
+
+function deleteButton(SavedItems, ItemToDelete){
+    const deletebutton = document.createElement("button");
+        deletebutton.className = "deletebutton";
+        deletebutton.innerText = "🗑";
+        deletebutton.addEventListener("click", () => {
+            delete SavedItems[ItemToDelete];
+            putNewItemsIntoList(SavedItems);
+        });
+        return deletebutton;
+}
+
+function editButton(SavedItems){
+    const editbutton = document.createElement("button");
+        editbutton.className = "editbutton";
+        editbutton.innerText = "Edit";
+    const ParentElement = editButton.parentElement;
+    const ItemToEdit = ParentElement.id;
+    SavedItems[ItemToEdit] = prompt();
 }
 
 function getNewItemsFromInput(SavedItems) {
@@ -27,11 +41,6 @@ function getNewItemsFromInput(SavedItems) {
     putNewItemsIntoList(SavedItems);
 }
 
-
-function deleteItem(button, SavedItems) {
-    const idOfItemToDelete = button.parentElement.id;
-    delete SavedItems[idOfItemToDelete];
-}
 
 document.addEventListener("DOMContentLoaded", function () {
     const InputElements = {1: "ToDo1", 2: "ToDo2"};
