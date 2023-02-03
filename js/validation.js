@@ -1,9 +1,5 @@
-const USERS = {"example@example.com": "0039829837498983749823"}
+const USERS = [{"email": "example@example.com", "password": "password"}];
 
-function SignUpPasswordIsIdentical(PasswordOne, PasswordTwo){
-     const identicalpassword = PasswordOne.value == PasswordTwo.value;
-     return identicalpassword;
-}
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,13 +11,17 @@ document.addEventListener("DOMContentLoaded", () => {
     getSubmit.addEventListener("submit", function (event) {
         event.preventDefault();
         console.log("Hello")
-       if (SignUpPasswordIsIdentical(getPassword, getPasswordTwo)) {
+       if (getPassword.value == getPasswordTwo.value && getPassword.value != "") {
             const newUser = {
                 "email": getEmailaddress.value,
                 "password": getPassword.value
             }
+            USERS.push(newUser);
             console.log(newUser);
             console.log(USERS);
+            getPassword.classList.remove("glowred")
+    } else {
+        getPassword.classList.add("glowred");
     }
 });
 
