@@ -18,11 +18,12 @@ function deleteButton(ItemToDelete) {
     deletebutton.innerText = "🗑️";
     deletebutton.addEventListener("click", () => {
         async function deleteLi (ItemToDelete) {
-            const del = await fetch(`http://localhost:3000/task/${ItemToDelete}`, {
-                method: "DELETE"});
+            const del = await fetch(`http://localhost:3000/auth/cookie/task/${ItemToDelete}`, {
+                method: "DELETE",
+                credentials: "include" });
             const res = await del.json();
             console.log(res);
-            getData("http://localhost:3000/tasks");
+            getData("http://localhost:3000/auth/cookie/tasks");
             }  
             deleteLi(ItemToDelete);
     });
@@ -50,8 +51,9 @@ function editButton(ItemToEdit) {
             const updatedValue = input.value;
             li.removeChild(input);
            async function updateLi (ItemToDelete, updatedValue) {
-               const update = await fetch(`http://localhost:3000/tasks`, {
+               const update = await fetch(`http://localhost:3000/auth/cookie/tasks`, {
                    method: "PUT",
+                   credentials: "include",
                    headers: {
                        "Content-Type": "application/json"
                     },
@@ -60,7 +62,7 @@ function editButton(ItemToEdit) {
                         title: updatedValue
                     })
                });
-    getData("http://localhost:3000/tasks");
+    getData("http://localhost:3000/auth/cookie/tasks");
            }
             updateLi(ItemToEdit, updatedValue);
 
@@ -85,12 +87,13 @@ async function getNewItemsFromInput(url) {
     if (getInputElements.value == "") return;
     const res = await fetch(url, {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({title: getInputElements.value})
     });
-    getData("http://localhost:3000/tasks");
+    getData("http://localhost:3000/auth/cookie/tasks");
 }
 
 
@@ -106,11 +109,11 @@ async function getNewItemsFromInput(url) {
 document.addEventListener("DOMContentLoaded", function () {
     const getSubmitElements = document.forms["todolist"];
 
-    getData("http://localhost:3000/tasks");
+    getData("http://localhost:3000/auth/cookie/tasks");
 
 
     getSubmitElements.addEventListener("submit", function (event) {
         event.preventDefault();
-        getNewItemsFromInput("http://localhost:3000/tasks");
+        getNewItemsFromInput("http://localhost:3000/auth/cookie/tasks");
     })
 })
