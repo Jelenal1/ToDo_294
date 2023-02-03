@@ -67,6 +67,7 @@ function getNewItemsFromInput(SavedItems) {
     if (getInputElements.value == "") return;
     SavedItems[idOfNewItem] = getInputElements.value;
     RenderList(SavedItems);
+    getInputElements.value = "";
 }
 
 
