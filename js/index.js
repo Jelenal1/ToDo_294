@@ -22,9 +22,9 @@ function deleteButton(ItemToDelete) {
                 method: "DELETE"});
             const res = await del.json();
             console.log(res);
+            getData("http://localhost:3000/tasks");
             }  
             deleteLi(ItemToDelete);
-            getData("http://localhost:3000/tasks");
     });
      return deletebutton;
     
@@ -44,21 +44,26 @@ function editButton(ItemToEdit) {
         input.value = li.innerText.slice(0, li.innerText.length -5);
         li.innerText = "";
         li.appendChild(input);
-        input.focus();
       
         input.addEventListener("keydown", (event) => {
           if (event.key === "Enter" && input.value !== "") {
             const updatedValue = input.value;
             li.removeChild(input);
-           async function updateLi (ItemToEdit) {
+           async function updateLi (ItemToDelete, updatedValue) {
                const update = await fetch(`http://localhost:3000/tasks`, {
                    method: "PUT",
                    headers: {
                        "Content-Type": "application/json"
-                    }
-                   
+                    },
+                    body: JSON.stringify({
+                        id: ItemToDelete,
+                        title: updatedValue
+                    })
                });
+    getData("http://localhost:3000/tasks");
            }
+            updateLi(ItemToEdit, updatedValue);
+
           }
         });
       });
