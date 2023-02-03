@@ -2,28 +2,36 @@ function RenderList(list) {
     const listOfToDoItems = document.getElementById("list");
     listOfToDoItems.innerText = "";
     if (list == undefined) return;
-    Object.entries(list).forEach((value) => {
+    list.forEach((value) => {
         const li = newLi(value);
-        li.append(deleteButton(list, li.id))
-        li.append(editButton(list, li.id))
+        li.append(deleteButton(value.id))
+        li.append(editButton(value.id))
         listOfToDoItems.append(li);
     });
 }
 
-function deleteButton(SavedItems, ItemToDelete) {
+function deleteButton(ItemToDelete) {
     const deletebutton = document.createElement("button");
     deletebutton.classList.add("button");  
     deletebutton.classList.add("borderblueviolet");  
     deletebutton.classList.add("ms-2"); //code from getbootstrap.com
     deletebutton.innerText = "🗑️";
     deletebutton.addEventListener("click", () => {
-        delete SavedItems[ItemToDelete];
-        RenderList(SavedItems);
+        async function deleteLi (ItemToDelete) {
+            const del = await fetch(`http://localhost:3000/task/${ItemToDelete}`, {
+                method: "DELETE"});
+            const res = await del.json();
+            console.log(res);
+            }  
+            deleteLi(ItemToDelete);
+            getData("http://localhost:3000/tasks");
     });
-    return deletebutton;
+     return deletebutton;
+    
+    
 }
 
-function editButton(SavedItems, ItemToEdit) {
+function editButton(ItemToEdit) {
     const editbutton = document.createElement("button");
     editbutton.classList.add("button");    
     editbutton.classList.add("borderblueviolet");    
@@ -42,9 +50,15 @@ function editButton(SavedItems, ItemToEdit) {
           if (event.key === "Enter" && input.value !== "") {
             const updatedValue = input.value;
             li.removeChild(input);
-            li.innerText = updatedValue;
-            SavedItems[ItemToEdit] = updatedValue;
-            RenderList(SavedItems);
+           async function updateLi (ItemToEdit) {
+               const update = await fetch(`http://localhost:3000/tasks`, {
+                   method: "PUT",
+                   headers: {
+                       "Content-Type": "application/json"
+                    }
+                   
+               });
+           }
           }
         });
       });
@@ -56,30 +70,42 @@ function newLi(value) {
     newItem.classList.add("list-group-item");   //code from getbootstrap.com
     newItem.classList.add("borderblueviolet");   
     newItem.classList.add("fw-bold");   //code from getbootstrap.com
-    newItem.id = value[0];
-    newItem.innerText = value[1];
+    newItem.id = value.id;
+    newItem.innerText = value.title;
     return newItem;
 }
 
-function getNewItemsFromInput(SavedItems) {
+async function getNewItemsFromInput(url) {
     const getInputElements = document.getElementById("addtodo");
-    const idOfNewItem = Object.keys(SavedItems).length + 1; //Zeile von Kursleiter
     if (getInputElements.value == "") return;
-    SavedItems[idOfNewItem] = getInputElements.value;
-    RenderList(SavedItems);
-    getInputElements.value = "";
+    const res = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({title: getInputElements.value})
+    });
+    getData("http://localhost:3000/tasks");
 }
 
 
+ async function getData(url) {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);    
+        RenderList(data);
+ }
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
-    const InputElements = { 1: "TODO" };
     const getSubmitElements = document.forms["todolist"];
 
+    getData("http://localhost:3000/tasks");
 
-    RenderList(InputElements);
 
     getSubmitElements.addEventListener("submit", function (event) {
         event.preventDefault();
-        getNewItemsFromInput(InputElements);
+        getNewItemsFromInput("http://localhost:3000/tasks");
     })
 })
